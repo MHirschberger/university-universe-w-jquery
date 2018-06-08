@@ -34,4 +34,8 @@ class UniversitiesController < ApplicationController
         end
     end
 
+    def university_params
+        params.require(:university).permit(:name, :city, :state, :country)
+    end
+
 end
