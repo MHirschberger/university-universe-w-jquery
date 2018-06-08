@@ -1,0 +1,11 @@
+<h1>University Index</h1>
+<p>Select university name for more details.</p>
+<table>
+    <% @universities.each do |u| %>
+    <tr>
+        <td><%= link_to u.name, university_path(u) %></td>
+        <td><%="#{u.city} #{u.state}"%></td>
+        <td><%=u.country%></td>
+    </tr>
+    <% end %>
+</table>

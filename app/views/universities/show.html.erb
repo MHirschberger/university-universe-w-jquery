@@ -1,0 +1,6 @@
+<h1><%= @university.name %></h1>
+<p><%= "#{@university.city} #{@university.state}" %><br>
+<%= @university.country %></p>
+
+<%= link_to "Courses at #{@university.name}", courses_path %>
+
