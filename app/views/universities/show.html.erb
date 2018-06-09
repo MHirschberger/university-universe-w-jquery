@@ -2,5 +2,6 @@
 <p><%= "#{@university.city} #{@university.state}" %><br>
 <%= @university.country %></p>
 
-<%= link_to "Courses at #{@university.name}", courses_path %>
+<%= link_to "Courses at #{@university.name}", university_courses_path(@university) %>
 
+See an error? <%= link_to "Edit This University", edit_university_path(@university) %>

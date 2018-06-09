@@ -22,7 +22,7 @@ class UniversitiesController < ApplicationController
     end
 
     def edit
-        @university = University.new
+        @university = University.find_by(id: params[:id])
     end
 
     def update
@@ -30,9 +30,10 @@ class UniversitiesController < ApplicationController
         if @university.update(university_params)
             redirect_to university_path(@university)
         else
-            redirect_to edit_university_path
+            redirect_to edit_university_path(@university)
         end
     end
+    
 
     def university_params
         params.require(:university).permit(:name, :city, :state, :country)

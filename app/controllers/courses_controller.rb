@@ -1,6 +1,7 @@
 class CoursesController < ApplicationController
     def index
-        @courses = Course.all
+        @university = University.find(params[:university_id])
+        @courses = @university.courses
     end
 
     def new
@@ -12,7 +13,7 @@ class CoursesController < ApplicationController
         if @course.save
             redirect_to course_path(@course)
         else
-            redirect_to new_course_path
+            redirect_to new_university_course_path
         end
     end
 
@@ -21,7 +22,7 @@ class CoursesController < ApplicationController
     end
 
     def edit
-        @course = Course.new
+        @course = Course.find_by(id: params[:id])
     end
 
     def update
@@ -39,7 +40,7 @@ class CoursesController < ApplicationController
     end
 
     def course_params
-        params.require(:course).permit(:course_number, :name, :department)
+        params.require(:course).permit(:course_number, :name, :department, :university_id)
     end
         
 end

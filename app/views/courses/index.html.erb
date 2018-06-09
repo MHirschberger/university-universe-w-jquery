@@ -1,0 +1,21 @@
+<h1><%= @university.name %></h1>
+<h1>Course Index</h1>
+<p>Select course name for more details.</p>
+<table>
+    <tr>
+        <th>Department</th>
+        <th>Course Number</th>
+        <th>Course Name</th>
+    </tr>
+    <% @courses.each do |course| %>
+    <tr>
+        <td><%= link_to course.course_number, course_path(course) %></td>
+        <td><%= link_to course.name, course_path(course) %></td>
+        <td><%= course.department %></td>
+    </tr>
+    <% end %>
+</table>
+
+<br></br>
+
+<p>Don't see your course? <%= link_to "Add A Course", new_university_course_path(@university) %></p>

@@ -1,0 +1,7 @@
+<%= form_for(@course) do |f| %>
+Course Number: <%= f.text_field :course_number %><br>
+Course Name: <%= f.text_field :name %><br>
+Department: <%= f.text_field :department %><br>
+Course Description: <%= f.text_field :description %><br>
+<%= f.submit %>
+<% end %>
