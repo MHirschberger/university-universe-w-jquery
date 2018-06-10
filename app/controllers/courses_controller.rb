@@ -37,7 +37,7 @@ class CoursesController < ApplicationController
 
     def destroy
         Course.find_by(id: params[:id]).destroy
-        redirect_to courses_path
+        redirect_to university_courses_path
     end
 
     def course_params

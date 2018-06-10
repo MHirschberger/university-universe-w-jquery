@@ -1,4 +1,5 @@
 <%= form_for(@course) do |f| %>
+<%= f.hidden_field :university_id %>
 Course Number: <%= f.text_field :course_number %><br>
 Course Name: <%= f.text_field :name %><br>
 Department: <%= f.text_field :department %><br>

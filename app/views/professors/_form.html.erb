@@ -1,4 +1,5 @@
-<%= form_for(@professor) do |f| %>
+<%= form_for(@professor, url: path) do |f| %>
+<%= f.hidden_field :university_id %>
 Professor Name: <%= f.text_field :name %><br></br>
 Department: <%= f.text_field :department %><br></br>
 <%= f.submit %>
