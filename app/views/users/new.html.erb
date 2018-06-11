@@ -1,0 +1,15 @@
+<%= form_for(@user) do |f| %>
+<h1>New User</h1>
+
+<h2>Personal Information:</h2>
+First Name: <%= f.text_field :first_name %>
+Last Name: <%= f.text_field :first_name %><br>
+Email Address: <%= f.text_field :email %><br>
+
+<h2>Login Information:</h2>
+Username: <%= f.text_field :username %><br>
+Password: <%= f.password_field :password %><br>
+Confirm Password: <%= f.password_field :password_confirmation %><br>
+
+<%= f.submit %>
+<% end %>
