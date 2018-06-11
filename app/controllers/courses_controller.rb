@@ -6,7 +6,7 @@ class CoursesController < ApplicationController
 
     def new
         @university = University.find(params[:university_id])
-        @course = Course.new
+        @course = Course.new(university_id: params[:university_id])
     end
 
     def create
@@ -41,7 +41,7 @@ class CoursesController < ApplicationController
     end
 
     def course_params
-        params.require(:course).permit(:course_number, :name, :department, :university_id)
+        params.require(:course).permit(:course_number, :name, :department, :professor, :university_id)
     end
         
 end

@@ -1,9 +1,8 @@
-<h1>Course Details: <%=@course.name%></h1>
+<h1><%=@course.course_number%> <%=@course.name%></h1>
 <h2><%= @course.university.name %></h2>
-<h2><%= @course.department %> Department</h2>
-<h2>Course Description:</h2>
-<p><%= @course.description %></p>
+<h2>Department: <%= @course.department %></h2>
+<h2>Professor: <%=@course.professor%></h2>
 
-<%= link_to "Edit This Course", edit_course_path(@course) %>
+See an error? <%= link_to "Edit This Course", edit_course_path(@course) %>
 
 

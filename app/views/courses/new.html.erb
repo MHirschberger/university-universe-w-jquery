@@ -1,4 +1,4 @@
 <h1>Add A New Course</h1>
 <h1><%=@university.name%></h1>
 
-<%= render 'form' %>
+<%= render partial: 'form', locals: {path: university_courses_path} %>

@@ -3,15 +3,17 @@
 <p>Select course name for more details.</p>
 <table>
     <tr>
-        <th>Department</th>
         <th>Course Number</th>
         <th>Course Name</th>
+        <th>Department</th>
+        <th>Professor</th>
     </tr>
     <% @courses.each do |course| %>
     <tr>
         <td><%= link_to course.course_number, course_path(course) %></td>
         <td><%= link_to course.name, course_path(course) %></td>
         <td><%= course.department %></td>
+        <td><%= course.professor %></td>
     </tr>
     <% end %>
 </table>
