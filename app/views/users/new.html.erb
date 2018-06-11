@@ -1,15 +1,29 @@
 <%= form_for(@user) do |f| %>
-<h1>New User</h1>
+<% if @user.errors.any? %>
+    <div id="error_explanation">
+    <h2>
+        <%= pluralize(@user.errors.count, "error") %>
+        prohibited this article from being saved:
+    </h2>
+
+    <ul>
+    <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+    <% end %>
+    </ul>
+    </div>
+<% end %>
+<h1>Create Your Account</h1>
 
 <h2>Personal Information:</h2>
 First Name: <%= f.text_field :first_name %>
-Last Name: <%= f.text_field :first_name %><br>
+Last Name: <%= f.text_field :last_name %><br><br>
 Email Address: <%= f.text_field :email %><br>
 
-<h2>Login Information:</h2>
-Username: <%= f.text_field :username %><br>
-Password: <%= f.password_field :password %><br>
-Confirm Password: <%= f.password_field :password_confirmation %><br>
+<h2>Create Your Login:</h2>
+Username: <%= f.text_field :username %><br><br>
+Password: <%= f.password_field :password %><br><br>
+Confirm Password: <%= f.password_field :password_confirmation %><br><br>
 
 <%= f.submit %>
 <% end %>
