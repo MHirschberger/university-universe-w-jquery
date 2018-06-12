@@ -16,14 +16,12 @@
 <h1>Create Your Account</h1>
 
 <h2>Personal Information:</h2>
-First Name: <%= f.text_field :first_name %><br><br>
-Last Name: <%= f.text_field :last_name %><br><br>
-Email Address: <%= f.text_field :email %><br>
-
-<h2>Create Your Login:</h2>
-Username: <%= f.text_field :username %><br><br>
-Password: <%= f.password_field :password %><br><br>
-Confirm Password: <%= f.password_field :password_confirmation %><br><br>
+Name: <%= f.text_field :name %><br></br>
+Email Address: <%= f.text_field :email %><br></br>
+Password: <%= f.password_field :password %><br></br>
+Confirm Password: <%= f.password_field :password_confirmation %><br></br>
 
 <%= f.submit %>
-<% end %>
+<% end %><br></br>
+
+or <%= link_to('Log in with Facebook!', '/auth/facebook') %>

@@ -1,4 +1,4 @@
-<h1>Welcome, <%= current_user.first_name %>!</h1>
+<h1>Welcome, <%= @user.name %>!</h1>
 <h2>Here are the comments that you've posted:</h2>
 
 <a id= "Log Out" rel="nofollow" data-method="delete" href="<%= '/signout' %>"/>Log Out</a>
