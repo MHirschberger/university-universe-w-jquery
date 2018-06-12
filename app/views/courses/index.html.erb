@@ -1,5 +1,10 @@
 <h1><%= @university.name %></h1>
-<h1>Course Index</h1>
+<p><%= "#{@university.city} #{@university.state}" %><br>
+<%= @university.country %></p>
+
+See an error? <%= link_to "Edit This University", edit_university_path(@university) %>
+
+<h2>Course Index</h2>
 <p>Select course name for more details.</p>
 <table>
     <tr>

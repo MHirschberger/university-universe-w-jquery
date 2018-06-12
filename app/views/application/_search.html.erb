@@ -1,0 +1,12 @@
+<%= form_tag(path, :method => "get", id: "search-form") do %>
+    <%= text_field_tag :search, params[:search], placeholder: placeholder %>
+    <%= submit_tag "Search", :name => nil %>
+<% end %>
+
+<% if var.blank? %>
+    <p>There are no universities containing the term <%= params[:search] %>.</p>
+<% elsif var.count < model_all.count %>
+    <%= form_tag(path, :method => "get", id: "search-form") do %>
+        <p><%= submit_tag "Clear Results", :name => nil %></p>
+    <% end %>
+<% end %>

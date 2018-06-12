@@ -22,10 +22,6 @@ class UniversitiesController < ApplicationController
         end
     end
 
-    def show
-        @university = University.find_by(id: params[:id])
-    end
-
     def edit
         @university = University.find_by(id: params[:id])
     end
