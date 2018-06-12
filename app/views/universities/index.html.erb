@@ -1,4 +1,18 @@
 <h1>University Index</h1>
+
+<%= form_tag(universities_path, :method => "get", id: "search-form") do %>
+    <%= text_field_tag :search, params[:search], placeholder: "Search Universities" %>
+    <%= submit_tag "Search", :name => nil %>
+<% end %>
+
+<% if @universities.blank? %>
+    <p>There are no recipes containing the term <%= params[:search] %>.</p>
+<% elsif @universities.count < University.all.count %>
+    <%= form_tag(universities_path, :method => "get", id: "search-form") do %>
+        <p><%= submit_tag "Clear Results", :name => nil %></p>
+    <% end %>
+<% end %>
+
 <p>Select university name for more details.</p>
 
 <table>
