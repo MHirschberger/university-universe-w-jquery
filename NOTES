@@ -1,0 +1,1 @@
+<%=f.collection_select :country, University.countries, :country, :country %>

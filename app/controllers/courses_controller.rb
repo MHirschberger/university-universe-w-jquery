@@ -2,6 +2,11 @@ class CoursesController < ApplicationController
     def index
         @university = University.find(params[:university_id])
         @courses = @university.courses
+        if params[:search]
+            @courses = @courses.search(params[:search]).order("created_at DESC")
+        else
+            @courses = @courses.order("created_at DESC")
+        end
     end
 
     def new

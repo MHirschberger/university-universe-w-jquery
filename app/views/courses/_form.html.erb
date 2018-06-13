@@ -2,7 +2,20 @@
 <%= f.hidden_field :university_id %>
 Course Number: <%= f.text_field :course_number %><br></br>
 Course Name: <%= f.text_field :name %><br></br>
-Department: <%= f.text_field :department %><br></br>
-Professor: <%= f.text_field :professor %><br></br>
+Department: 
+<datalist id="course_departments_autocomplete">
+    <% Course.attrib(:department)do |department| %>
+        <option value="<%= department %>">
+    <% end %>
+</datalist>
+<%= f.text_field :department, list: "course_departments_autocomplete" %><br></br>
+Professor: 
+<datalist id="course_professors_autocomplete">
+    <% Course.attrib(:professor)do |professor| %>
+        <option value="<%= professor %>">
+    <% end %>
+</datalist>
+<%= f.text_field :professor, list: "course_professors_autocomplete" %><br></br>
+
 <%= f.submit %>
 <% end %>

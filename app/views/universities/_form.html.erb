@@ -1,7 +1,14 @@
 <%= form_for(@university) do |f| %>
 University Name: <%= f.text_field :name %><br></br>
 City: <%= f.text_field :city %><br></br>
-State: <%= f.text_field :state %><br></br>
-Country: <%= f.text_field :country %><br></br>
+State: <%= f.select :state, us_states, :include_blank => true %> (Leave blank if university is outside U.S.)
+<br></br>
+Country: 
+  <datalist id="countries_autocomplete">
+    <% University.attrib(:country).each do |country| %>
+      <option value="<%= country %>">
+    <% end %>
+  </datalist>
+<%= f.text_field :country, list: "countries_autocomplete" %><br></br>
 <%= f.submit %>
 <% end %>
