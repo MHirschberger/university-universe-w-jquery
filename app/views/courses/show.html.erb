@@ -3,6 +3,8 @@
 <h2>Department: <%= @course.department %></h2>
 <h2>Professor: <%=@course.professor%></h2>
 
-See an error? <%= link_to "Edit This Course", edit_course_path(@course) %>
+See an error? <%= link_to "Edit This Course", edit_course_path(@course) %><br></br>
+
+<%= link_to "Back to Course Index", university_courses_path(@course.university) %>
 
 

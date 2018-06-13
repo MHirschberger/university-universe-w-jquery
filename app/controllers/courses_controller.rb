@@ -3,9 +3,9 @@ class CoursesController < ApplicationController
         @university = University.find(params[:university_id])
         @courses = @university.courses
         if params[:search]
-            @courses = @courses.search(params[:search]).order("created_at DESC")
+            @courses = @courses.search(params[:search]).order("name")
         else
-            @courses = @courses.order("created_at DESC")
+            @courses = @courses.order("name")
         end
     end
 

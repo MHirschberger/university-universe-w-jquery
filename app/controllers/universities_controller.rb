@@ -3,9 +3,9 @@ class UniversitiesController < ApplicationController
     def index
         @universities = University.all
         if params[:search]
-            @universities = University.search(params[:search]).order("created_at DESC")
+            @universities = University.search(params[:search]).order("name")
         else
-            @universities = University.all.order("created_at DESC")
+            @universities = University.all.order("name")
         end
     end
 
