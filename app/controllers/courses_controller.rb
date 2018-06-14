@@ -45,6 +45,8 @@ class CoursesController < ApplicationController
         redirect_to university_courses_path
     end
 
+    private
+    
     def course_params
         params.require(:course).permit(:course_number, :name, :department, :professor, :university_id)
     end

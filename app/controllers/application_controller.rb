@@ -17,6 +17,14 @@ class ApplicationController < ActionController::Base
       end
     end
 
+    def post_types
+      [
+        ['Current Student', 'Current Student'],
+        ['Course Review/Rating', 'Course Review/Rating'],
+        ['Other', 'Other']
+      ]
+    end
+
     def us_states
       [
         ['AK', 'AK'],
