@@ -12,9 +12,9 @@ class PostsController < ApplicationController
     def create
         @post = Post.new(post_params)
         if @post.save
-            redirect_to course_posts_path(@course)
+            redirect_to course_posts_path(@post.course)
         else
-            redirect_to new_course_post_path
+            redirect_to new_course_post_path(@post.course)
         end
     end
 
@@ -26,16 +26,16 @@ class PostsController < ApplicationController
     def update
         @post = Post.find_by(id: params[:id])
         if @post.update(post_params)
-            redirect_to course_posts_path(@course)
+            redirect_to course_posts_path(@post.course)
         else
-            redirect_to edit_course_post_path
+            redirect_to edit_course_post_path(@post.course, @post)
         end
     end
 
     private
 
-    def posts_controller
-        params.require(:post).permit(:type, :content, :course_id, :user_id)
+    def post_params
+        params.require(:post).permit(:post_type, :content, :course_id, :user_id)
     end
 
 end
