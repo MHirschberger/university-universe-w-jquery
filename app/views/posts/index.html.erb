@@ -1,3 +1,5 @@
+<%= link_to "Back to Course Index", university_courses_path(@course.university) %><br>
+
 <h1><%=@course.course_number%> <%=@course.name%></h1>
 <h2><%= @course.university.name %></h2>
 <h2>Department: <%= @course.department %></h2>
@@ -5,11 +7,11 @@
 
 See an error? <%= link_to "Edit This Course", edit_course_path(@course) %><br></br>
 
-<%= link_to "Back to Course Index", university_courses_path(@course.university) %><br></br>
-
-<%= link_to 'Create a New Post', new_course_post_path(@course) %>
 
 <h1>Posts</h1>
+
+<%= link_to 'Create a New Post', new_course_post_path(@course) %><br><br><br>
+
 <% @posts.each do |post| %>
     <div class="post">
         <%= post.last_updated %><br>

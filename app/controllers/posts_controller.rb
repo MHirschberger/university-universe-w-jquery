@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
     def index
         @course = Course.find(params[:course_id])
-        @posts = @course.posts
+        @posts = @course.posts.order(updated_at: :desc)
     end
 
     def new
