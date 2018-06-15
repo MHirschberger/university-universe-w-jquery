@@ -41,12 +41,13 @@ class CoursesController < ApplicationController
     end
 
     def destroy
-        Course.find_by(id: params[:id]).destroy
-        redirect_to university_courses_path
+        @course = Course.find_by(id: params[:id])
+        @course.destroy
+        redirect_to university_courses_path(@course.university)
     end
 
     private
-    
+
     def course_params
         params.require(:course).permit(:course_number, :name, :department, :professor, :university_id)
     end

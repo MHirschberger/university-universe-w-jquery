@@ -12,9 +12,9 @@ See an error? <%= link_to "Edit This Course", edit_course_path(@course) %><br></
 <h1>Posts</h1>
 <% @posts.each do |post| %>
     <div class="post">
+        <%= post.last_updated %><br>
         <%= post.post_type %><br>
-        <%= post.last_updated %><br></br>
-        <%= post.user.name %> says:<br></br>
+        Written by: <%= post.user.name %><br></br>
         <%= post.content %><br>
         <%= link_to "Edit Post", edit_course_post_path(@course, post) %><br></br>
     </div>

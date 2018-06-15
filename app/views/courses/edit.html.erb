@@ -1,3 +1,7 @@
 <h1>Edit Course</h1>
 
 <%= render partial: 'form', locals: {path: course_path(@course)} %>
+
+<br></br>
+
+<%= link_to "Delete This Course", @course, method: :delete, data: { confirm: "Are You Sure You Want To Delete?" } %>
