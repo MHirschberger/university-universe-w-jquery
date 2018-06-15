@@ -3,14 +3,13 @@
 
     <% @posts.each do |post| %>
         <div class="post">
-            <%= link_to post.course.name, course_path(post.course) %> at <%= link_to post.university.name, university_path(post.university) %> 
+            <%= link_to " #{post.course.course_number} #{post.course.name}", course_posts_path(post.course) %> at 
+                <%= link_to post.course.university.name, university_courses_path(post.course.university) %><br> 
             <%= post.post_type %><br>
             <%= post.last_updated %><br></br>
-            <%= post.user.name %> says:<br></br>
             <%= post.content %><br>
-            <%= link_to "Edit Post", edit_course_post_path(@course, post) %><br></br>
+            <%= link_to "Edit Post", edit_course_post_path(post.course, post) %><br></br>
         </div>
     <% end %>
 
-<a id= "Log Out" rel="nofollow" data-method="delete" href="<%= '/signout' %>"/>Log Out</a>
 
