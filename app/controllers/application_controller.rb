@@ -17,6 +17,10 @@ class ApplicationController < ActionController::Base
       end
     end
 
+    def require_login
+      return head(:forbidden) unless logged_in?
+    end
+
     def post_types
       [
         ['Current Student', 'Current Student'],

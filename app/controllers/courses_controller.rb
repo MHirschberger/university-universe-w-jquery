@@ -1,4 +1,6 @@
 class CoursesController < ApplicationController
+    before_action :require_login
+
     def index
         @university = University.find(params[:university_id])
         @courses = @university.courses
@@ -21,10 +23,6 @@ class CoursesController < ApplicationController
         else
             redirect_to new_university_course_path
         end
-    end
-
-    def show
-        @course = Course.find_by(id: params[:id])
     end
 
     def edit

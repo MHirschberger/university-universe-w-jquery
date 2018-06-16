@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+    before_action :require_login
+    
     def index
         @course = Course.find(params[:course_id])
         @posts = @course.posts.order(updated_at: :desc)

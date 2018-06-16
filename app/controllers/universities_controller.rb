@@ -1,4 +1,5 @@
 class UniversitiesController < ApplicationController
+    before_action :require_login
 
     def index
         @universities = University.all
@@ -36,7 +37,7 @@ class UniversitiesController < ApplicationController
     end
     
     private
-    
+
     def university_params
         params.require(:university).permit(:name, :city, :state, :country)
     end
