@@ -17,8 +17,10 @@ See an error? <%= link_to "Edit This Course", edit_course_path(@course) %><br></
         <%= post.last_updated %><br>
         <%= post.post_type %><br>
         Written by: <%= post.user.name %><br></br>
-        <%= post.content %><br>
-        <%= link_to "Edit Post", edit_course_post_path(@course, post) %><br></br>
+        <%= post.content %><br></br>
+        <% if post.user == current_user %>
+            <%= link_to "Edit Post", edit_course_post_path(@course, post) %><br></br>
+        <% end %>
     </div>
 <% end %>
 

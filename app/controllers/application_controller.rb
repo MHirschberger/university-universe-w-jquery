@@ -21,6 +21,12 @@ class ApplicationController < ActionController::Base
       return head(:forbidden) unless logged_in?
     end
 
+    def validate_poster(post)
+      if post.user != current_user
+        return head(:forbidden)
+      end
+    end
+
     def post_types
       [
         ['Current Student', 'Current Student'],

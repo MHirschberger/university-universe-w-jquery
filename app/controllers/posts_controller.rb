@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
     before_action :require_login
-    
+
     def index
         @course = Course.find(params[:course_id])
         @posts = @course.posts.order(updated_at: :desc)
@@ -23,10 +23,12 @@ class PostsController < ApplicationController
     def edit
         @course = Course.find(params[:course_id])
         @post = Post.find_by(id: params[:id])
+        validate_poster(@post)
     end
 
     def update
         @post = Post.find_by(id: params[:id])
+        validate_poster(@post)
         if @post.update(post_params)
             redirect_to course_posts_path(@post.course)
         else
@@ -36,6 +38,7 @@ class PostsController < ApplicationController
 
     def destroy
         @post = Post.find_by(id: params[:id])
+        validate_poster(@post)
         @post.destroy
         redirect_to course_posts_path(@post.course)
     end
