@@ -11,12 +11,6 @@ class ApplicationController < ActionController::Base
       !session[:user_id].nil?
     end
 
-    def home
-      if logged_in?
-        redirect_to user_path(current_user)
-      end
-    end
-
     def require_login
       return head(:forbidden) unless logged_in?
     end

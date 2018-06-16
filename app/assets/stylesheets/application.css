@@ -13,3 +13,18 @@
  *= require_tree .
  *= require_self
  */
+
+ * {
+     background-color: #e6f2ff;
+     font-family: Helvetica;
+ }
+
+ .user_welcome, .signin, .new_user {
+     text-align: center;
+ }
+
+
+
+
+
+

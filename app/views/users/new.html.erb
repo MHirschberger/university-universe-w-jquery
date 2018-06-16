@@ -1,27 +1,29 @@
-<%= form_for(@user) do |f| %>
-<% if @user.errors.any? %>
-    <div id="error_explanation">
-    <h2>
-        <%= pluralize(@user.errors.count, "error") %>
-        prohibited this article from being saved:
-    </h2>
+ <div class="new_user">   
+    <%= form_for(@user) do |f| %>
+    <% if @user.errors.any? %>
+        <div id="error_explanation">
+            <h2>
+                <%= pluralize(@user.errors.count, "error") %>
+                occurred. Please try again:
+            </h2>
 
-    <ul>
-    <% @user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+            <ul>
+            <% @user.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+            </ul>
+        </div>
     <% end %>
-    </ul>
-    </div>
-<% end %>
-<h1>Create Your Account</h1>
+    <h1>Create Your Account</h1>
 
-<h2>Personal Information:</h2>
-Name: <%= f.text_field :name %><br></br>
-Email Address: <%= f.text_field :email %><br></br>
-Password: <%= f.password_field :password %><br></br>
-Confirm Password: <%= f.password_field :password_confirmation %><br></br>
+    <h2>Personal Information:</h2>
+    Name: <%= f.text_field :name %><br></br>
+    Email Address: <%= f.text_field :email %><br></br>
+    Password: <%= f.password_field :password %><br></br>
+    Confirm Password: <%= f.password_field :password_confirmation %><br></br>
 
-<%= f.submit %>
-<% end %><br></br>
+    <%= f.submit %>
+    <% end %><br></br>
 
-or <%= link_to('Log in with Facebook!', '/auth/facebook') %>
+    or <%= link_to('Log in with Facebook!', '/auth/facebook') %>
+</div>
