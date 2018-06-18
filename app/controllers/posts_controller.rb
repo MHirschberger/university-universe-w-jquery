@@ -4,6 +4,11 @@ class PostsController < ApplicationController
     def index
         @course = Course.find(params[:course_id])
         @posts = @course.posts.order(updated_at: :desc)
+        if params[:post_type_filter] && !params[:post_type_filter].blank?
+            @posts = @course.posts.filter(params[:post_type_filter]).order(updated_at: :desc)
+        else
+            @posts = @course.posts.order(updated_at: :desc)
+        end
     end
 
     def new

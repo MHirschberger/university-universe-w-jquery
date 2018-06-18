@@ -10,6 +10,20 @@ See an error? <%= link_to "Edit This Course", edit_course_path(@course) %><br></
 
 <h1>Posts</h1>
 
+<div>
+  <h3>Filter Posts By Type:</h3>
+  <%= form_tag(course_posts_path(@course), method: "get") do %>
+    <%= select_tag :post_type_filter, options_for_select(post_types), include_blank: true %>
+    <%= submit_tag "Filter" %>
+  <% end %>
+
+    <% if @posts.count < @course.posts.count %>
+        <%= form_tag(course_posts_path(@course), :method => "get") do %>
+            <p><%= submit_tag "Clear Search Results" %></p>
+        <% end %>
+    <% end %><br>
+</div>
+
 <%= link_to 'Create a New Post', new_course_post_path(@course) %><br><br><br>
 
 <% @posts.each do |post| %>

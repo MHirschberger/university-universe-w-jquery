@@ -23,8 +23,28 @@
      text-align: center;
  }
 
+ .navbar {
+    display: flex;
+    justify-content: left;
+    background-color: #333333;
+    overflow: hidden;
+  }
 
+  .navbar a {
+    color: #cccccc;
+    background-color: #333333;
+    text-align: center;
+    padding: 6px 12px;
+    text-decoration: none;
+    font-size: 17px;
+  }
 
+  .navbar a:hover {
+    color: white;
+  }
 
+  .post {
+    border-style: solid;
+  }
 
 
