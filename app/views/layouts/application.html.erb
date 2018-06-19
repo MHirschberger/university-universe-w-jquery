@@ -13,7 +13,7 @@
     <div class="navbar">
       <%= link_to "Home", root_path %>
       <% if logged_in? %>
-        <%= link_to current_user.name, user_path(current_user) %>
+        <%= link_to "#{current_user.name}'s Profile", user_path(current_user) %>
         <%= link_to "Universities", universities_path %>
         <%= link_to "Log Out", signout_path, method: :delete %>
       <% else %>

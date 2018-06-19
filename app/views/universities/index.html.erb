@@ -1,26 +1,28 @@
-<h1>University Index</h1>
+<div class="university-index">
+    <h1>University Index</h1>
 
-<%= render partial: 'search', locals: {path: universities_path, placeholder: "Search Universities", var: @universities, model_all: University.all} %>
+    <%= render partial: 'search', locals: {path: universities_path, placeholder: "Search Universities", var: @universities, model_all: University.all} %>
 
-<p>Select university name for more details.</p>
+    <p>Select university name for more details.</p>
 
-<table>
-    <tr>
-        <th>University Name</th>
-        <th>City</th> 
-        <th>State</th>
-        <th>Country</th>
-    </tr>
-    <% @universities.each do |u| %>
-    <tr>
-        <td><%= link_to u.name, university_courses_path(u) %></td>
-        <td><%=u.city%></td> 
-        <td><%=u.state%></td>
-        <td><%=u.country%></td>
-    </tr>
-    <% end %>
-</table>
+    <table border="1">
+        <tr>
+            <th>University Name</th>
+            <th>City</th> 
+            <th>State</th>
+            <th>Country</th>
+        </tr>
+        <% @universities.each do |u| %>
+        <tr>
+            <td><%= link_to u.name, university_courses_path(u) %></td>
+            <td><%=u.city%></td> 
+            <td><%=u.state%></td>
+            <td><%=u.country%></td>
+        </tr>
+        <% end %>
+    </table>
 
-<br></br>
+    <br></br>
 
-<p>Don't see your university? <%= link_to "Add A New University", new_university_path %></p>
+    <p>Don't see your university? <%= link_to "Add A New University", new_university_path %></p>
+</div>

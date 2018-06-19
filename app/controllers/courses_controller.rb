@@ -17,9 +17,10 @@ class CoursesController < ApplicationController
     end
 
     def create
+        @university = University.find(params[:university_id])
         @course = Course.new(course_params)
         if @course.save
-            redirect_to course_path(@course)
+            redirect_to university_courses_path(@university)
         else
             redirect_to new_university_course_path
         end
@@ -30,9 +31,10 @@ class CoursesController < ApplicationController
     end
 
     def update
+        @university = University.find(params[:university_id])
         @course = Course.find_by(id: params[:id])
         if @course.update(course_params)
-            redirect_to course_path(@course)
+            redirect_to university_courses_path(@university)
         else
             redirect_to edit_course_path
         end
