@@ -28,13 +28,13 @@ class CoursesController < ApplicationController
 
     def edit
         @course = Course.find_by(id: params[:id])
+        @university = @course.university
     end
 
     def update
-        @university = University.find(params[:university_id])
         @course = Course.find_by(id: params[:id])
         if @course.update(course_params)
-            redirect_to university_courses_path(@university)
+            redirect_to university_courses_path(@course.university)
         else
             redirect_to edit_course_path
         end

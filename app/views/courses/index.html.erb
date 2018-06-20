@@ -6,7 +6,18 @@ See an error? <%= link_to "Edit This University", edit_university_path(@universi
 
 <h2>Course Index</h2>
 
-<%= render partial: 'search', locals: {path: university_courses_path, placeholder: "Search Courses", var: @courses, model_all: Course.all} %>
+<%= form_tag(university_courses_path(@university), :method => "get", id: "search-form") do %>
+    <%= text_field_tag :search, params[:search], placeholder: "Search Courses" %>
+    <%= submit_tag "Search", :name => nil %>
+<% end %>
+
+<% if @courses.blank? %>
+    <p><strong>No Courses</strong></p>
+<% elsif @courses.count < @university.courses.count %>
+    <%= form_tag(university_courses_path(@university), :method => "get", id: "search-form") do %>
+        <p><%= submit_tag "Clear Search Results" %></p>
+    <% end %>
+<% end %>
 
 <p>Select course name for more details.</p>
 <table border="1">

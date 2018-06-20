@@ -6,14 +6,13 @@ Department:
 <%= f.text_field :department, list: "course_departments_autocomplete" %><br></br>
 
     <datalist id="course_departments_autocomplete">
-        <% binding.pry %>
-        <% @university.courses.attrib(:department) do |department| %>
+        <% @university.courses.attrib(:department).each do |department| %>
             <option value="<%= department %>">
         <% end %>
     </datalist>
 Professor: 
     <datalist id="course_professors_autocomplete">
-        <% @university.courses.attrib(:professor) do |professor| %>
+        <% @university.courses.attrib(:professor).each do |professor| %>
             <option value="<%= professor %>">
         <% end %>
     </datalist>
