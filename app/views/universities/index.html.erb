@@ -7,7 +7,7 @@
     <% end %>
 
     <% if @universities.blank? %>
-        <p>There are no universities containing the term <%= params[:search] %>.</p>
+        <p><strong>No Universities</strong></p>
     <% elsif @universities.count < University.all.count %>
         <%= form_tag(universities_path, :method => "get", id: "search-form") do %>
             <p><%= submit_tag "Clear Search Results", :name => nil %></p>

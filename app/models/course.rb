@@ -3,6 +3,8 @@ class Course < ApplicationRecord
     has_many :posts
     has_many :users, through: :posts
 
+    validates :course_number, :name, :department, :professor, presence:true
+
     def self.search(search)
         where("course_number LIKE ? OR name LIKE ? OR department LIKE ? OR professor LIKE ?", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%") 
     end
