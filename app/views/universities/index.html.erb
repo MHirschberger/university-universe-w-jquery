@@ -16,22 +16,24 @@
 
     <p>Select university name for more details.</p>
 
-    <table border="1">
-        <tr>
-            <th>University Name</th>
-            <th>City</th> 
-            <th>State</th>
-            <th>Country</th>
-        </tr>
-        <% @universities.each do |u| %>
-        <tr>
-            <td><%= link_to u.name, university_courses_path(u) %></td>
-            <td><%=u.city%></td> 
-            <td><%=u.state%></td>
-            <td><%=u.country%></td>
-        </tr>
-        <% end %>
-    </table>
+    <div class="centered">
+        <table border="1">
+            <tr>
+                <th>University Name</th>
+                <th>City</th> 
+                <th>State</th>
+                <th>Country</th>
+            </tr>
+            <% @universities.each do |u| %>
+            <tr>
+                <td><%= link_to u.name, university_courses_path(u) %></td>
+                <td><%=u.city%></td> 
+                <td><%=u.state%></td>
+                <td><%=u.country%></td>
+            </tr>
+            <% end %>
+        </table>
+    </div>
 
     <br></br>
 

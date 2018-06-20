@@ -14,18 +14,40 @@
  *= require_self
  */
 
- * {
-     background-color: #e6f2ff;
-     font-family: Helvetica;
-     text-align: center;
-     margin: 10px auto;
+  * {
+      background-color: #e6f2ff;
+      margin: 0;
+  }
+
+  .logo {
+    font-family: Impact;
+    padding: 20px;
+    font-size: 25px;
+  }
+
+ .container {
+    text-align: center;
+    font-family: Helvetica;
  }
 
+ .container * {
+  margin: 10px auto;
+ }
+
+ div.centered 
+{
+    text-align: center;
+}
+
+div.centered table 
+{
+    margin: 0 auto; 
+    text-align: left;
+}
  .navbar {
-    display: flex;
-    justify-content: left;
     background-color: #333333;
-    overflow: hidden;
+    padding: 8px 8px;
+    font-family: Helvetica;
   }
 
   .navbar a {

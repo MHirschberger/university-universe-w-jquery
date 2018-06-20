@@ -19,23 +19,26 @@ See an error? <%= link_to "Edit This University", edit_university_path(@universi
     <% end %>
 <% end %>
 
-<p>Select course name for more details.</p>
-<table border="1">
-    <tr>
-        <th>Course Name</th>
-        <th>Course Number</th>
-        <th>Department</th>
-        <th>Professor</th>
-    </tr>
-    <% @courses.each do |course| %>
-    <tr>
-        <td><%= link_to course.name, course_posts_path(course) %></td>
-        <td><%= link_to course.course_number, course_posts_path(course) %></td>
-        <td><%= course.department %></td>
-        <td><%= course.professor %></td>
-    </tr>
-    <% end %>
-</table>
+<p>Select course name for more details.</p><br>
+
+<div class="centered">
+    <table border="1">
+        <tr>
+            <th>Course Name</th>
+            <th>Course Number</th>
+            <th>Department</th>
+            <th>Professor</th>
+        </tr>
+        <% @courses.each do |course| %>
+        <tr>
+            <td><%= link_to course.name, course_posts_path(course) %></td>
+            <td><%= link_to course.course_number, course_posts_path(course) %></td>
+            <td><%= course.department %></td>
+            <td><%= course.professor %></td>
+        </tr>
+        <% end %>
+    </table>
+</div>
 
 <br></br>
 
