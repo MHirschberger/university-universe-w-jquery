@@ -1,15 +1,18 @@
 <div class="user_welcome">
     <h1>Welcome, <%= @user.name %>!</h1>
-    <h2>Here are the comments that you've posted:</h2>
-    <% @posts.each do |post| %>
-        <div class="post">
-            <%= link_to " #{post.course.course_number} #{post.course.name}", course_posts_path(post.course) %> at 
-                <%= link_to post.course.university.name, university_courses_path(post.course.university) %><br> 
-            <%= post.post_type %><br>
-            <%= post.last_updated %><br></br>
-            <%= post.content %><br>
-            <%= link_to "Edit Post", edit_course_post_path(post.course, post) %>
-        </div>
+
+    <% if !@posts.blank? %>
+        <h2>Here are the comments that you've posted:</h2>
+        <% @posts.each do |post| %>
+            <div class="post">
+                <%= link_to " #{post.course.course_number} #{post.course.name}", course_posts_path(post.course) %> at 
+                    <%= link_to post.course.university.name, university_courses_path(post.course.university) %><br> 
+                <%= post.post_type %><br>
+                <%= post.last_updated %><br></br>
+                <%= post.content %><br>
+                <%= link_to "Edit Post", edit_course_post_path(post.course, post) %>
+            </div>
+        <% end %>
     <% end %>
 </div>
 
