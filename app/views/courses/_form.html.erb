@@ -1,4 +1,18 @@
 <%= form_for @course, url: path do |f| %>
+<% if @course.errors.any? %>
+    <div id="error_explanation">
+        <h2>
+            <%= pluralize(@course.errors.count, "error") %>
+            occurred. Please try again:
+        </h2>
+
+        <ul>
+        <% @course.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+        <% end %>
+        </ul>
+    </div>
+<% end %>
 <%= f.hidden_field :university_id %>
 Course Number: <%= f.text_field :course_number %><br></br>
 Course Name: <%= f.text_field :name %><br></br>

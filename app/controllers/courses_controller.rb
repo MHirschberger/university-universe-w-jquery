@@ -22,7 +22,7 @@ class CoursesController < ApplicationController
         if @course.save
             redirect_to university_courses_path(@university)
         else
-            redirect_to new_university_course_path
+            render 'new'
         end
     end
 
@@ -36,7 +36,8 @@ class CoursesController < ApplicationController
         if @course.update(course_params)
             redirect_to university_courses_path(@course.university)
         else
-            redirect_to edit_course_path
+            @university = @course.university
+            render 'edit'
         end
     end
 
