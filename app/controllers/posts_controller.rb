@@ -21,7 +21,8 @@ class PostsController < ApplicationController
         if @post.save
             redirect_to course_posts_path(@post.course)
         else
-            redirect_to new_course_post_path(@post.course)
+            @course = @post.course
+            render 'new'
         end
     end
 
@@ -37,7 +38,8 @@ class PostsController < ApplicationController
         if @post.update(post_params)
             redirect_to course_posts_path(@post.course)
         else
-            redirect_to edit_course_post_path(@post.course, @post)
+            @course = @post.course
+            render 'edit'
         end
     end
 
