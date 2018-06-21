@@ -13,6 +13,7 @@
         </ul>
     </div>
 <% end %>
+
 University Name: <%= f.text_field :name %><br></br>
 City: <%= f.text_field :city %><br></br>
 State: <%= f.select :state, us_states, :include_blank => true %> (Leave blank if university is outside U.S.)
