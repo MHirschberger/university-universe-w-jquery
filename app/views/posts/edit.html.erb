@@ -1,7 +1,7 @@
 <h1><%= @course.course_number%> <%= @course.name%></h1>
 <h1>Edit Post</h1>
 
-<%= render 'form' %>
+<%= render partial: 'form', locals: {path: course_post_path(@course, @post)} %>
 
 <br></br>
 

@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
 
-  resources :posts
   root 'application#home'
-  resources :universities do
+  resources :universities, only: [:index, :new, :create, :edit, :update, :show] do
     resources :courses, only: [:index, :new, :create]
   end
 
