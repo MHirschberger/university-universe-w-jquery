@@ -15,8 +15,8 @@
 <% end %>
 <%= f.hidden_field :course_id %>
 <%= f.hidden_field :user_id %>
-Type of Post: <%= f.select :post_type, post_types %><br></br>
-Content: <%= f.text_area :content %><br></br>
+Type of Post:<br> <%= f.select :post_type, post_types %><br></br>
+Message:<br><%= f.text_area :content %><br></br>
 
 <%= f.submit %>
 <% end %>
