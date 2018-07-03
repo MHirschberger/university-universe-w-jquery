@@ -17,4 +17,12 @@ class User < ApplicationRecord
         not uid.nil? 
     end
 
+    def self.most_posts
+        self.joins(:posts)
+        .select("users.*, count(posts.id) as pcount")
+        .group("users.id")
+        .order("pcount DESC")
+        .limit(1)
+    end
+
 end

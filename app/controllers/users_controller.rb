@@ -25,6 +25,10 @@ class UsersController < ApplicationController
         @posts = @user.posts.order(updated_at: :desc)
     end
 
+    def most_posts
+        @user = User.most_posts[0]
+    end
+
     private
 
     def user_params
