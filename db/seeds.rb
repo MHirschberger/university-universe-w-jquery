@@ -23,3 +23,7 @@ Course.create([{ course_number: 'PHIL101', name: 'Introduction to Philosophy', d
 User.create([{ name: 'Dan13', email: 'dan@dan.com', password: 'dan'},
 { name: 'Jessica19', email: 'jess@jess.com', password: 'jess'}])
 
+Post.create([{ post_type: 'Current Student', content: 'Hey, anyone else here?', user_id: 1, course_id: 1 },
+    { post_type: 'Current Student', content: 'Hey, I am here too!', user_id: 2, course_id: 1 },
+    { post_type: 'Current Student', content: 'Anyone want to meet up after class tomorrow?', user_id: 1, course_id: 1 },
+    { post_type: 'Course Review/Rating', content: 'A solid introduction to philosophy. A great professor too!', user_id: 2, course_id: 1 }])
