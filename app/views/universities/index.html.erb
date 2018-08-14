@@ -23,6 +23,7 @@
                 <th>City</th> 
                 <th>State</th>
                 <th>Country</th>
+                <th>Courses</th>
             </tr>
             <% @universities.each do |u| %>
             <tr>
@@ -30,6 +31,7 @@
                 <td><%=u.city%></td> 
                 <td><%=u.state%></td>
                 <td><%=u.country%></td>
+                <td><%= "<button class='uni-courses' id='#{u.id}'>View Courses</button>".html_safe %></td>
             </tr>
             <% end %>
         </table>
@@ -38,4 +40,7 @@
     <br></br>
 
     <p>Don't see your university? <%= link_to "Add A New University", new_university_path %></p>
+
+    <div class="coursetable"></div>
+
 </div>
