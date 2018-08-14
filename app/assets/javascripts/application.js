@@ -14,3 +14,6 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+//= require university-universe
+//= require jquery
+//= require jquery_ujs
