@@ -9,7 +9,7 @@ class CoursesController < ApplicationController
         else
             @courses = @courses.order("name")
         end
-        render json: @courses
+        render json: @courses, status: 200
     end
 
     def new

@@ -23,6 +23,11 @@ class UniversitiesController < ApplicationController
         end
     end
 
+    def show
+        @university = University.find_by(id: params[:id])
+        render json: @university, status: 200
+    end
+    
     def edit
         @university = University.find_by(id: params[:id])
     end
