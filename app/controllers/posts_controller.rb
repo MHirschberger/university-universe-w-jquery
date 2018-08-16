@@ -9,6 +9,10 @@ class PostsController < ApplicationController
         else
             @posts = @course.posts.order(updated_at: :desc)
         end
+        respond_to do |format|
+            format.html { render :index }
+            format.json { render json: @posts }
+        end
     end
 
     def new
