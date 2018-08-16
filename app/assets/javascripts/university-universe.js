@@ -1,5 +1,12 @@
 //GET request to display courses on university index page
 
+// window.onload = function() {
+//     if(!window.location.hash) {
+//         window.location.reload();
+//         window.location = window.location + '#loaded';
+//     }
+// }
+
 class Course {
     constructor(id, courseNumber, name, department, professor) {
         this.id = id;
@@ -11,21 +18,22 @@ class Course {
 
     appendCourse(selector) {
         selector.append('<tr>' +
-            `<td> ${this.name} </td>` +
-            `<td> ${this.courseNumber} </td>` +
+            `<td><a href="/courses/${this.id}/posts">${this.name}</a></td>` +
+            `<td><a href="/courses/${this.id}/posts">${this.courseNumber}</a></td>` +
             `<td> ${this.department} </td>` +
             `<td> ${this.professor} </td>` +
-        `</tr>`);
+        '</tr>');
     }
  }
- let newCourse;
+let newCourse;
 
 $(function() {
+   
     $("td").find(".uni-courses").on('click', function() {
         $.get("/universities/" + $(this).attr("id") + "/courses", function(data) {
             console.log(data);
             $(".coursetable").html("");
-            $(".coursetable").append('<h2>Courses for: ' + data[0].university.name + '</h2><br>' + 
+            $(".coursetable").append('<h1>Course Index</h1><br>' + '<h2>' + data[0].university.name + '</h2>' + 
             '<p>Select course name for more details and to view posts.</p>' +
                 '<table border="1">' + 
                     '<tr>' + 

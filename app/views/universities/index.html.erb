@@ -1,44 +1,47 @@
-<div class="university-index">
-    <h1>University Index</h1>
+<div class="index-container">  
+    <div class="university-index">
+        <h1>University Index</h1>
 
-    <%= form_tag(universities_path, :method => "get", id: "search-form") do %>
-        <%= text_field_tag :search, params[:search], placeholder: "Search Universities" %>
-        <%= submit_tag "Search", :name => nil %>
-    <% end %>
-
-    <% if @universities.blank? %>
-        <p><strong>No Universities</strong></p>
-    <% elsif @universities.count < University.all.count %>
         <%= form_tag(universities_path, :method => "get", id: "search-form") do %>
-            <p><%= submit_tag "Clear Search Results", :name => nil %></p>
+            <%= text_field_tag :search, params[:search], placeholder: "Search Universities" %>
+            <%= submit_tag "Search", :name => nil %>
         <% end %>
-    <% end %>
 
-    <div class="centered">
-        <table border="1">
-            <tr>
-                <th>University Name</th>
-                <th>City</th> 
-                <th>State</th>
-                <th>Country</th>
-                <th>Courses</th>
-            </tr>
-            <% @universities.each do |u| %>
-            <tr>
-                <td><%= link_to u.name, university_courses_path(u) %></td>
-                <td><%=u.city%></td> 
-                <td><%=u.state%></td>
-                <td><%=u.country%></td>
-                <td><%= "<button class='uni-courses' id='#{u.id}'>View Courses</button>".html_safe %></td>
-            </tr>
+        <% if @universities.blank? %>
+            <p><strong>No Universities</strong></p>
+        <% elsif @universities.count < University.all.count %>
+            <%= form_tag(universities_path, :method => "get", id: "search-form") do %>
+                <p><%= submit_tag "Clear Search Results", :name => nil %></p>
             <% end %>
-        </table>
+        <% end %>
+
+        <p>Select "View Courses" to view the courses of your university.</p>
+
+        <div class="centered">
+            <table border="1">
+                <tr>
+                    <th>University Name</th>
+                    <th>City</th> 
+                    <th>State</th>
+                    <th>Country</th>
+                    <th>Courses</th>
+                </tr>
+                <% @universities.each do |u| %>
+                <tr>
+                    <td><%= u.name %></td>
+                    <td><%=u.city%></td> 
+                    <td><%=u.state%></td>
+                    <td><%=u.country%></td>
+                    <td><%= "<button class='uni-courses' id='#{u.id}'>View Courses</button>".html_safe %></td>
+                </tr>
+                <% end %>
+            </table>
+        </div>
+
+        <br>
+
+        <p>Don't see your university? <%= link_to "Add A New University", new_university_path %></p>
+
     </div>
-
-    <br>
-
-    <p>Don't see your university? <%= link_to "Add A New University", new_university_path %></p>
-
     <div class="coursetable"></div>
-
 </div>

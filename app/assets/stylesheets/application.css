@@ -39,6 +39,25 @@
     text-align: center;
 }
 
+.index-container
+{
+  margin: 0 auto;
+  overflow: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.university-index
+{
+  float:left;
+}
+
+.coursetable
+{
+  float:left;
+}
+
 div.centered table 
 {
     margin: 0 auto; 
