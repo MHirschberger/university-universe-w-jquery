@@ -1,22 +1,22 @@
 <%= link_to "Back to University/Course Index", universities_path %><br>
 
 <div class="post_index">
-    <h1><%=@course.course_number%> <%=@course.name%></h1>
-    <h2><%= @course.university.name %></h2>
-    <h2>Department: <%= @course.department %></h2>
-    <h2>Professor: <%=@course.professor%></h2>
+        <h1><%=@course.course_number%> <%=@course.name%></h1>
+        <h2><%= @course.university.name %></h2>
+        <h2>Department: <%= @course.department %></h2>
+        <h2>Professor: <%= @course.professor %></h2>
 
-    See an error? <%= link_to "Edit This Course", edit_course_path(@course) %><br></br>
-
+        See an error? <%= link_to "Edit This Course", edit_course_path(@course) %><br></br>
+    </div>
 
     <h1>Posts</h1>
 
     <div>
-    <h3>Filter Posts By Type:</h3>
-    <%= form_tag(course_posts_path(@course), method: "get") do %>
-        <%= select_tag :post_type_filter, options_for_select(post_types), include_blank: true %>
-        <%= submit_tag "Filter" %>
-    <% end %>
+        <h3>Filter Posts By Type:</h3>
+        <%= form_tag(course_posts_path(@course), method: "get") do %>
+            <%= select_tag :post_type_filter, options_for_select(post_types), include_blank: true %>
+            <%= submit_tag "Filter" %>
+        <% end %>
 
         <% if @posts.count < @course.posts.count %>
             <%= form_tag(course_posts_path(@course), :method => "get") do %>
@@ -29,12 +29,13 @@
 
     <% @posts.each do |post| %>
         <div class="post">
-            <%= post.last_updated %><br>
+            <%= post.created_at %><br>
             <%= post.post_type %><br>
             Written by: <%= post.user.name %><br></br>
             <%= post.content %><br></br>
+            <%= link_to "See Post Details", course_post_path(@course, post) %>
             <% if post.user == current_user %>
-                <%= link_to "Edit Post", edit_course_post_path(@course, post) %>
+                <br></br><%= link_to "Edit Post", edit_course_post_path(@course, post) %>
             <% end %>
         </div>
     <% end %>

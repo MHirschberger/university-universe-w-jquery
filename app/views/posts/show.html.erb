@@ -1,0 +1,18 @@
+<a href="#" class="js-next" data-id="<%= @post.id %>">Next Post for This Course</a>
+<a href="#" class="js-prev" data-id="<%= @post.id %>">Previous Post for This Course</a>
+<%= link_to "Back to Post Index", course_posts_path(@course) %><br>
+
+
+<h1>Posts for <%=@course.course_number%>: <%= @course.name %></h1>
+<h2><%= @course.university.name %></h2>
+
+<div class="post">
+    <p class="post-created">Created: <%= @post.created_at %></p>
+    <p class="post-updated">Last Updated: <%= @post.last_updated %></p>
+    <p class="post-type">Post Type: <%= @post.post_type %></p>
+    <p class="post-user-name">Written by: <%= @post.user.name %></p><br></br>
+    <p class="post-content"><%= @post.content %></p><br></br>
+    <% if @post.user == current_user %>
+        <%= link_to "Edit Post", edit_course_post_path(@course, @post) %>
+    <% end %>
+</div>

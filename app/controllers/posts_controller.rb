@@ -9,10 +9,6 @@ class PostsController < ApplicationController
         else
             @posts = @course.posts.order(updated_at: :desc)
         end
-        respond_to do |format|
-            format.html { render :index }
-            format.json { render json: @posts }
-        end
     end
 
     def new
@@ -27,6 +23,15 @@ class PostsController < ApplicationController
         else
             @course = @post.course
             render 'new'
+        end
+    end
+
+    def show
+        @course = Course.find(params[:course_id])
+        @post = Post.find_by(id: params[:id])
+        respond_to do |format|
+            format.html { render :show }
+            format.json { render json: @posts, include: ['user', 'course', 'course.university'] }
         end
     end
 

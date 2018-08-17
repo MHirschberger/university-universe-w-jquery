@@ -8,12 +8,13 @@
 // }
 
 class Course {
-    constructor(id, courseNumber, name, department, professor) {
+    constructor(id, courseNumber, name, department, professor, university) {
         this.id = id;
         this.courseNumber = courseNumber;
         this.name = name;
         this.department = department;
         this.professor = professor;
+        this.university = university;
     }
 
     appendCourse(selector) {
@@ -24,6 +25,7 @@ class Course {
             `<td> ${this.professor} </td>` +
         '</tr>');
     }
+
  }
 let newCourse;
 
@@ -44,9 +46,20 @@ $(function() {
                     '</tr>' +
                 '</table>');
             $.each(data, function() {
-                newCourse = new Course(this.id, this.course_number, this.name, this.department, this.professor);
+                newCourse = new Course(this.id, this.course_number, this.name, this.department, this.professor, this.university.name);
                 newCourse.appendCourse($(".coursetable table"));
             });
+        });
+    });
+
+    $(".js-next-course").on("click", function() {
+        var nextId = parseInt($(".js-next-course").attr("data-id")) + 1
+        $.get("/courses/" + nextId + "/posts", function(data) {
+            $(".course-number").text(data["name"]);
+            $(".course-name").text(data["price"]);
+            $(".productInventory").text(data["inventory"]);
+            $(".productDescription").text(data["description"]);
+            $(".js-next").attr("data-id", data["id"]);
         });
     });
 });
