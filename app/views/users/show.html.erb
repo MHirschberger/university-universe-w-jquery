@@ -1,6 +1,8 @@
 <div class="user_welcome">
     <h1>Welcome, <%= @user.name %>!</h1>
 
+    <a href="#" class="view-user-posts" >Click to View Your Posts</a>
+
     <% if !@posts.blank? %>
         <h2>Here are the comments that you've posted:</h2>
         <% @posts.each do |post| %>

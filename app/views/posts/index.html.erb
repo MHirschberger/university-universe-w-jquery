@@ -7,9 +7,32 @@
         <h2>Professor: <%= @course.professor %></h2>
 
         See an error? <%= link_to "Edit This Course", edit_course_path(@course) %><br></br>
-    </div>
 
-    <h1>Posts</h1>
+    <h1>Posts</h1><br>
+
+    <h2>Create a New Post:</h2>
+    <%= form_for @post, url: course_posts_path(@course), html: {id: "new-post"} do |f| %>
+        <div id="error_explanation">
+            <% if @post.errors.any? %>
+                <h2>
+                    <%= pluralize(@post.errors.count, "error") %>
+                    occurred. Please try again:
+                </h2>
+
+                <ul>
+                <% @post.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                <% end %>
+                </ul>
+            <% end %>
+        </div>
+        <%= f.hidden_field :course_id %>
+        <%= f.hidden_field :user_id %>
+        Type of Post:<br> <%= f.select :post_type, post_types %><br></br>
+        Message:<br><%= f.text_area :content %><br>
+
+        <%= f.submit %>
+    <% end %><br>
 
     <div>
         <h3>Filter Posts By Type:</h3>
@@ -26,19 +49,20 @@
     </div>
 
     <%= link_to 'Create a New Post', new_course_post_path(@course) %><br><br><br>
-
-    <% @posts.each do |post| %>
-        <div class="post">
-            <%= post.created_at %><br>
-            <%= post.post_type %><br>
-            Written by: <%= post.user.name %><br></br>
-            <%= post.content %><br></br>
-            <%= link_to "See Post Details", course_post_path(@course, post) %>
-            <% if post.user == current_user %>
-                <br></br><%= link_to "Edit Post", edit_course_post_path(@course, post) %>
-            <% end %>
-        </div>
-    <% end %>
+    <div class="post-list">
+        <% @posts.each do |post| %>
+            <div class="post" id="<%=post.id%>">
+                <%= post.created_at %><br>
+                <%= post.post_type %><br>
+                Written by: <%= post.user.name %><br></br>
+                <%= post.content %><br></br>
+                <%= link_to "See Post Details", course_post_path(@course, post) %>
+                <% if post.user == current_user %>
+                    <br></br><%= link_to "Edit Post", edit_course_post_path(@course, post) %>
+                <% end %>
+            </div>
+        <% end %>
+    </div>
 </div>
 
 

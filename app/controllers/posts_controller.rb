@@ -1,14 +1,16 @@
 class PostsController < ApplicationController
+    skip_before_action :verify_authenticity_token
     before_action :require_login
 
     def index
         @course = Course.find(params[:course_id])
-        @posts = @course.posts.order(updated_at: :desc)
+        @posts = @course.posts.order(id: :desc)
         if params[:post_type_filter] && !params[:post_type_filter].blank?
-            @posts = @course.posts.filter(params[:post_type_filter]).order(updated_at: :desc)
+            @posts = @course.posts.filter(params[:post_type_filter]).order(id: :desc)
         else
-            @posts = @course.posts.order(updated_at: :desc)
+            @posts = @course.posts.order(id: :desc)
         end
+        @post = Post.new(course_id: params[:course_id], user_id: current_user.id)
     end
 
     def new
@@ -18,11 +20,20 @@ class PostsController < ApplicationController
 
     def create
         @post = Post.new(post_params)
+        
         if @post.save
-            redirect_to course_posts_path(@post.course)
+            respond_to do |format|
+                format.html { redirect_to course_posts_path(@post.course) }
+                format.json { render json: @post, include: ['user', 'course', 'course.university'] }
+            end
         else
             @course = @post.course
-            render 'new'
+            @posts = @course.posts.order(id: :desc)
+            respond_to do |format|
+                format.html { render 'index' }
+                format.json { render json: @post.errors, status: :unprocessable_entity }
+            end
+
         end
     end
 
@@ -31,7 +42,7 @@ class PostsController < ApplicationController
         @post = Post.find_by(id: params[:id])
         respond_to do |format|
             format.html { render :show }
-            format.json { render json: @posts, include: ['user', 'course', 'course.university'] }
+            format.json { render json: @post, include: ['user', 'course', 'course.university'] }
         end
     end
 

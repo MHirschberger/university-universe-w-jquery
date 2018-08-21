@@ -82,13 +82,17 @@ div.centered table
     color: white;
   }
 
-  .post {
+  .post, .post-details {
     box-sizing: border-box;
     width: 50%;
     border: 2px solid black;
     position: relative;
     padding: 20px 0;
     margin: 5px auto;
+  }
+
+  .js-next-course, .js-prev-course {
+    margin: auto 380px;
   }
 
   #error_explanation ul {

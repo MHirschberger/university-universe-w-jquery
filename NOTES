@@ -2,4 +2,25 @@
 
 url: path 
 
+<%= form_for @post, url: "#", :html => {:id => "new-post"} do |f| %>
+        <% if @post.errors.any? %>
+            <div id="error_explanation">
+                <h2>
+                    <%= pluralize(@post.errors.count, "error") %>
+                    occurred. Please try again:
+                </h2>
 
+                <ul>
+                <% @post.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                <% end %>
+                </ul>
+            </div>
+        <% end %>
+        <%= f.hidden_field :course_id %>
+        <%= f.hidden_field :user_id %>
+        Type of Post:<br> <%= f.select :post_type, post_types %><br></br>
+        Message:<br><%= f.text_area :content %><br>
+
+        <%= f.submit %>
+    <% end %>

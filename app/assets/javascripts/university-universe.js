@@ -27,13 +27,47 @@ class Course {
     }
 
  }
+
+ class Post {
+    constructor(id, createdAt, updatedAt, postType, user, content, course_id) {
+        this.id = id;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.postType = postType;
+        this.user = user;
+        this.content = content;
+        this.course_id = course_id;
+        // this.courseNumber = courseNumber;
+        // this.courseName = courseName;
+        // this.university = university;
+    }
+
+    changePost() {
+        $(".post-created").text(`Created: ${this.createdAt}`);
+        $(".post-updated").text(`Last Updated: ${this.updatedAt}`);
+        $(".post-type").text(`Post Type: ${this.postType}`);
+        $(".post-user-name").text(`Written by: ${this.user}`);
+        $(".post-content").text(`${this.content}`);
+    }
+
+    addNewPost(selector) {
+        $(selector).append(`${this.createdAt}<br>`);
+        $(selector).append(`${this.postType}<br>`);
+        $(selector).append(`Written by: ${this.user}<br></br>`);
+        $(selector).append(`${this.content}<br></br>`);
+        $(selector).append(`<a href="/courses/${this.course_id}/posts/${this.id}">See Post Details</a><br></br>`);
+        $(selector).append(`<a href="/courses/${this.course_id}/posts/${this.id}/edit">Edit Post</a><br>`);
+    }
+ }
+
+
 let newCourse;
 
 $(function() {
    
-    $("td").find(".uni-courses").on('click', function() {
+    $(".centered").on('click', ".uni-courses", function() {
         $.get("/universities/" + $(this).attr("id") + "/courses", function(data) {
-            console.log(data);
+            event.preventDefault();
             $(".coursetable").html("");
             $(".coursetable").append('<h1>Course Index</h1><br>' + '<h2>' + data[0].university.name + '</h2>' + 
             '<p>Select course name for more details and to view posts.</p>' +
@@ -52,14 +86,51 @@ $(function() {
         });
     });
 
-    $(".js-next-course").on("click", function() {
-        var nextId = parseInt($(".js-next-course").attr("data-id")) + 1
-        $.get("/courses/" + nextId + "/posts", function(data) {
-            $(".course-number").text(data["name"]);
-            $(".course-name").text(data["price"]);
-            $(".productInventory").text(data["inventory"]);
-            $(".productDescription").text(data["description"]);
-            $(".js-next").attr("data-id", data["id"]);
+    $(".js-next-course").on("click", function(event) {
+        event.preventDefault();
+        let courseId = parseInt($(".js-next-course").attr("data-courseId"));
+        let numPosts = parseInt($(".js-next-course").attr("data-numPosts"));
+        let nextId = ((parseInt($(".js-next-course").attr("data-id"))) % numPosts) + 1;
+        $.get(`/courses/${courseId}/posts/${nextId}.json`, function(data) {
+            nextPost = new Post(data.id, data.created, data.last_updated, data.post_type, data.user.name, data.content, data.course.id);
+            nextPost.changePost();
+            $(".js-next-course").attr("data-id", data.id);
         });
     });
+
+    $(".js-prev-course").on("click", function(event) {
+        event.preventDefault();
+        let courseId = parseInt($(".js-next-course").attr("data-courseId"));
+        let numPosts = parseInt($(".js-next-course").attr("data-numPosts"));
+        let currentId = parseInt($(".js-next-course").attr("data-id"));
+        let prevId = (((currentId - 1) + (numPosts - 1)) % numPosts) + 1;
+        $.get(`/courses/${courseId}/posts/${prevId}.json`, function(data) {
+            prevPost = new Post(data.id, data.created, data.last_updated, data.post_type, data.user.name, data.content, data.course.id);
+            prevPost.changePost();
+            $(".js-next-course").attr("data-id", data.id);
+        });
+    });
+
+    $("#new-post").on("submit", function(event) {
+        event.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: $(this).attr('action'),
+            data: $(this).serialize(),
+            dataType: "JSON"
+        }).done(function(data) {
+            newPost = new Post(data.id, data.created, data.last_updated, data.post_type, data.user.name, data.content, data.course.id);
+            let newDiv = $("<div>", {"id": `${data.id}`, "class": "post"});
+            $(".post-list").prepend(newDiv);
+            newPost.addNewPost(`.post#${data.id}`);
+        }).fail(function(data) {
+            $("#error_explanation").append("<h3>Errors:</h3>" +
+            "<ul>" +
+                $.each(data.responseJSON.content, function() {
+                    `<li>${this}</li>`
+                }) +
+            "</ul>")
+        }); 
+    }); 
 });
+
