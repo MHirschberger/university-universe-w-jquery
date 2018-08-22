@@ -29,17 +29,18 @@ class Course {
  }
 
  class Post {
-    constructor(id, createdAt, updatedAt, postType, user, content, course_id) {
+    constructor(id, createdAt, updatedAt, postType, user, content, courseId, courseNumber, courseName, universityId, universityName) {
         this.id = id;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.postType = postType;
         this.user = user;
         this.content = content;
-        this.course_id = course_id;
-        // this.courseNumber = courseNumber;
-        // this.courseName = courseName;
-        // this.university = university;
+        this.courseId = courseId;
+        this.courseNumber = courseNumber;
+        this.courseName = courseName;
+        this.universityId = universityId;
+        this.universityName = universityName;
     }
 
     changePost() {
@@ -51,13 +52,28 @@ class Course {
     }
 
     addNewPost(selector) {
-        $(selector).append(`${this.createdAt}<br>`);
-        $(selector).append(`${this.postType}<br>`);
-        $(selector).append(`Written by: ${this.user}<br></br>`);
-        $(selector).append(`${this.content}<br></br>`);
-        $(selector).append(`<a href="/courses/${this.course_id}/posts/${this.id}">See Post Details</a><br></br>`);
-        $(selector).append(`<a href="/courses/${this.course_id}/posts/${this.id}/edit">Edit Post</a><br>`);
+        selector.append(`${this.createdAt}<br>`);
+        selector.append(`${this.postType}<br>`);
+        selector.append(`Written by: ${this.user}<br></br>`);
+        selector.append(`${this.content}<br></br>`);
+        selector.append(`<a href="/courses/${this.courseId}/posts/${this.id}">See Post Details</a><br></br>`);
+        selector.append(`<a href="/courses/${this.courseId}/posts/${this.id}/edit">Edit Post</a><br>`);
     }
+
+    addCourseInfo(selector) {
+        selector.append(`<a href="/courses/${this.courseId}/posts">Visit This Course's Page</a><br></br>`);
+        selector.append(`${this.courseNumber} ${this.courseName}<br>`);
+        selector.append(`${this.universityName}<br></br>`);
+    }
+ }
+
+ class User {
+     constructor(id, name, posts) {
+         this.id = id;
+         this.name = name;
+         this.posts = posts;
+     }
+
  }
 
 
@@ -80,7 +96,7 @@ $(function() {
                     '</tr>' +
                 '</table>');
             $.each(data, function() {
-                newCourse = new Course(this.id, this.course_number, this.name, this.department, this.professor, this.university.name);
+                newCourse = new Course(this.id, this.course_number, this.name, this.department, this.professor, this.university);
                 newCourse.appendCourse($(".coursetable table"));
             });
         });
@@ -119,10 +135,10 @@ $(function() {
             data: $(this).serialize(),
             dataType: "JSON"
         }).done(function(data) {
-            newPost = new Post(data.id, data.created, data.last_updated, data.post_type, data.user.name, data.content, data.course.id);
+            let newPost = new Post(data.id, data.created, data.last_updated, data.post_type, data.user.name, data.content, data.course.id);
             let newDiv = $("<div>", {"id": `${data.id}`, "class": "post"});
             $(".post-list").prepend(newDiv);
-            newPost.addNewPost(`.post#${data.id}`);
+            newPost.addNewPost($(`.post#${data.id}`));
         }).fail(function(data) {
             $("#error_explanation").append("<h3>Errors:</h3>" +
             "<ul>" +
@@ -132,5 +148,26 @@ $(function() {
             "</ul>")
         }); 
     }); 
+
+    var newUser, newDiv, newUserPost;
+
+    $(".view-user-posts").on("click", function(event) {
+        event.preventDefault();
+        if ($(".user-posts").is(':empty')) {
+            $.get(`/users/${this.id}.json`, function(data) {
+                newUser = new User(data.id, data.name, data.posts);
+                $.each(newUser.posts, function() {
+                    newDiv = $("<div>", {"id": `${this.id}`, "class": "post"});
+                    $(".user-posts").prepend(newDiv);
+                    newUserPost = new Post(this.id, this.created, this.last_updated, this.post_type, data.name, this.content, this.course.id, this.course.course_number, this.course.name, this.course.university.id, this.course.university.name);
+                    newUserPost.addCourseInfo($(`#${this.id}.post`));
+                    newUserPost.addNewPost($(`#${this.id}.post`));
+                });
+            });
+        } else {
+            $(".user-posts").html('');
+        }
+        
+    });
 });
 

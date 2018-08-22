@@ -22,7 +22,11 @@ class UsersController < ApplicationController
     def show
         @user = User.find(params[:id])
         redirect_to root_url unless @user == current_user
-        @posts = @user.posts.order(updated_at: :desc)
+        respond_to do |format|
+            format.html { render :show }
+            format.json { render json: @user, include: ['posts', 'posts.course', 'posts.course.university'] }
+        end
+        #@posts = @user.posts.order(updated_at: :desc)
     end
 
     def most_posts

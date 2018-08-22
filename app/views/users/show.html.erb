@@ -1,7 +1,8 @@
 <div class="user_welcome">
-    <h1>Welcome, <%= @user.name %>!</h1>
+    <h1>Welcome, <%= @user.name %>!</h1><br>
 
-    <a href="#" class="view-user-posts" >Click to View Your Posts</a>
+    <a href="#" class="view-user-posts" id="<%= @user.id %>">Click to View Your Posts</a>
+    <div class="user-posts"></div>
 
     <% if !@posts.blank? %>
         <h2>Here are the comments that you've posted:</h2>
