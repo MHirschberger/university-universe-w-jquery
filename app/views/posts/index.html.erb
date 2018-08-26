@@ -52,7 +52,7 @@
     <div class="post-list">
         <% @posts.each do |post| %>
             <div class="post" id="<%=post.id%>">
-                <%= post.created_at %><br>
+                <%= post.created %><br>
                 <%= post.post_type %><br>
                 Written by: <%= post.user.name %><br></br>
                 <%= post.content %><br></br>
