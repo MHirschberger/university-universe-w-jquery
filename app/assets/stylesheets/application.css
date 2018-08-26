@@ -92,7 +92,7 @@ div.centered table
   }
 
   .js-next-course, .js-prev-course {
-    margin: auto 380px;
+    margin: 0 200px;
   }
 
   #error_explanation ul {

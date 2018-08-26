@@ -1,12 +1,3 @@
-//GET request to display courses on university index page
-
-// window.onload = function() {
-//     if(!window.location.hash) {
-//         window.location.reload();
-//         window.location = window.location + '#loaded';
-//     }
-// }
-
 class Course {
     constructor(id, courseNumber, name, department, professor, university) {
         this.id = id;
@@ -81,7 +72,7 @@ let newCourse;
 
 $(function() {
    
-    $(".centered").on('click', ".uni-courses", function() {
+    $(".uni-courses").on('click', function() {
         $.get("/universities/" + $(this).attr("id") + "/courses", function(data) {
             event.preventDefault();
             $(".coursetable").html("");
@@ -149,7 +140,7 @@ $(function() {
         }); 
     }); 
 
-    var newUser, newDiv, newUserPost;
+    let newUser, newDiv, newUserPost;
 
     $(".view-user-posts").on("click", function(event) {
         event.preventDefault();
