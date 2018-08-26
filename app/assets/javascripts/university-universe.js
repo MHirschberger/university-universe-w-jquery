@@ -7,16 +7,15 @@ class Course {
         this.professor = professor;
         this.university = university;
     }
+ }
 
-    appendCourse(selector) {
-        selector.append('<tr>' +
-            `<td><a href="/courses/${this.id}/posts">${this.name}</a></td>` +
-            `<td><a href="/courses/${this.id}/posts">${this.courseNumber}</a></td>` +
-            `<td> ${this.department} </td>` +
-            `<td> ${this.professor} </td>` +
+ Course.prototype.appendCourse = function(selector) {
+    selector.append('<tr>' +
+        `<td><a href="/courses/${this.id}/posts">${this.name}</a></td>` +
+        `<td><a href="/courses/${this.id}/posts">${this.courseNumber}</a></td>` +
+        `<td> ${this.department} </td>` +
+        `<td> ${this.professor} </td>` +
         '</tr>');
-    }
-
  }
 
  class Post {
@@ -33,30 +32,30 @@ class Course {
         this.universityId = universityId;
         this.universityName = universityName;
     }
-
-    changePost() {
-        $(".post-created").text(`Created: ${this.createdAt}`);
-        $(".post-updated").text(`Last Updated: ${this.updatedAt}`);
-        $(".post-type").text(`Post Type: ${this.postType}`);
-        $(".post-user-name").text(`Written by: ${this.user}`);
-        $(".post-content").text(`${this.content}`);
-    }
-
-    addNewPost(selector) {
-        selector.append(`${this.createdAt}<br>`);
-        selector.append(`${this.postType}<br>`);
-        selector.append(`Written by: ${this.user}<br></br>`);
-        selector.append(`${this.content}<br></br>`);
-        selector.append(`<a href="/courses/${this.courseId}/posts/${this.id}">See Post Details</a><br></br>`);
-        selector.append(`<a href="/courses/${this.courseId}/posts/${this.id}/edit">Edit Post</a><br>`);
-    }
-
-    addCourseInfo(selector) {
-        selector.append(`<a href="/courses/${this.courseId}/posts">Visit This Course's Page</a><br></br>`);
-        selector.append(`${this.courseNumber} ${this.courseName}<br>`);
-        selector.append(`${this.universityName}<br></br>`);
-    }
  }
+
+Post.prototype.changePost = function() {
+    $(".post-created").text(`Created: ${this.createdAt}`);
+    $(".post-updated").text(`Last Updated: ${this.updatedAt}`);
+    $(".post-type").text(`Post Type: ${this.postType}`);
+    $(".post-user-name").text(`Written by: ${this.user}`);
+    $(".post-content").text(`${this.content}`);
+}
+
+Post.prototype.addNewPost = function(selector) {
+    selector.append(`${this.createdAt}<br>`);
+    selector.append(`${this.postType}<br>`);
+    selector.append(`Written by: ${this.user}<br></br>`);
+    selector.append(`${this.content}<br></br>`);
+    selector.append(`<a href="/courses/${this.courseId}/posts/${this.id}">See Post Details</a><br></br>`);
+    selector.append(`<a href="/courses/${this.courseId}/posts/${this.id}/edit">Edit Post</a><br>`);
+}
+
+Post.prototype.addCourseInfo = function(selector) {
+    selector.append(`<a href="/courses/${this.courseId}/posts">Visit This Course's Page</a><br></br>`);
+    selector.append(`${this.courseNumber} ${this.courseName}<br>`);
+    selector.append(`${this.universityName}<br></br>`);
+}
 
  class User {
      constructor(id, name, posts) {
