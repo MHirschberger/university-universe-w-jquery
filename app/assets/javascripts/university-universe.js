@@ -67,7 +67,6 @@ Post.prototype.addCourseInfo = function(selector) {
  }
 
 
-let newCourse;
 
 $(function() {
    
@@ -86,7 +85,7 @@ $(function() {
                     '</tr>' +
                 '</table>');
             $.each(data, function() {
-                newCourse = new Course(this.id, this.course_number, this.name, this.department, this.professor, this.university);
+                let newCourse = new Course(this.id, this.course_number, this.name, this.department, this.professor, this.university);
                 newCourse.appendCourse($(".coursetable table"));
             });
         });
@@ -98,7 +97,7 @@ $(function() {
         let numPosts = parseInt($(".js-next-course").attr("data-numPosts"));
         let nextId = ((parseInt($(".js-next-course").attr("data-id"))) % numPosts) + 1;
         $.get(`/courses/${courseId}/posts/${nextId}.json`, function(data) {
-            nextPost = new Post(data.id, data.created, data.last_updated, data.post_type, data.user.name, data.content, data.course.id);
+            let nextPost = new Post(data.id, data.created, data.last_updated, data.post_type, data.user.name, data.content, data.course.id);
             nextPost.changePost();
             $(".js-next-course").attr("data-id", data.id);
         });
@@ -111,7 +110,7 @@ $(function() {
         let currentId = parseInt($(".js-next-course").attr("data-id"));
         let prevId = (((currentId - 1) + (numPosts - 1)) % numPosts) + 1;
         $.get(`/courses/${courseId}/posts/${prevId}.json`, function(data) {
-            prevPost = new Post(data.id, data.created, data.last_updated, data.post_type, data.user.name, data.content, data.course.id);
+            let prevPost = new Post(data.id, data.created, data.last_updated, data.post_type, data.user.name, data.content, data.course.id);
             prevPost.changePost();
             $(".js-next-course").attr("data-id", data.id);
         });
@@ -139,17 +138,15 @@ $(function() {
         }); 
     }); 
 
-    let newUser, newDiv, newUserPost;
-
     $(".view-user-posts").on("click", function(event) {
         event.preventDefault();
         if ($(".user-posts").is(':empty')) {
             $.get(`/users/${this.id}.json`, function(data) {
-                newUser = new User(data.id, data.name, data.posts);
+                let newUser = new User(data.id, data.name, data.posts);
                 $.each(newUser.posts, function() {
-                    newDiv = $("<div>", {"id": `${this.id}`, "class": "post"});
+                    let newDiv = $("<div>", {"id": `${this.id}`, "class": "post"});
                     $(".user-posts").prepend(newDiv);
-                    newUserPost = new Post(this.id, this.created, this.last_updated, this.post_type, data.name, this.content, this.course.id, this.course.course_number, this.course.name, this.course.university.id, this.course.university.name);
+                    let newUserPost = new Post(this.id, this.created, this.last_updated, this.post_type, data.name, this.content, this.course.id, this.course.course_number, this.course.name, this.course.university.id, this.course.university.name);
                     newUserPost.addCourseInfo($(`#${this.id}.post`));
                     newUserPost.addNewPost($(`#${this.id}.post`));
                 });
